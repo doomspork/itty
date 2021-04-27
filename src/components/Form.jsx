@@ -11,7 +11,7 @@ export default class Form extends Component {
   }
 
   handleChange(event) {
-    const { value } = event;
+    const { value } = event.target;
     const invalid = /(?<!https?):\/\//.test(value);
     this.setState({ url: value, invalid });
   }
@@ -31,7 +31,7 @@ export default class Form extends Component {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ finalUrl }),
+      body: JSON.stringify({ url: finalUrl }),
     };
 
     fetch(`${process.env.REACT_APP_API_HOST}/api/urls`, requestOptions)
